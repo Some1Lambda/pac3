@@ -5,8 +5,9 @@ local PAC = pace
 local checkluatype = SF.CheckLuaType
 local registerprivilege = SF.Permissions.registerPrivilege
 
-registerprivilege("pac3.load", "Load a PAC3 outfit", "Allows the user load a PAC3", { client = { default = 1 } })
-registerprivilege("pac3.clear", "Clear your PAC3 outfit", "Allows the user to clear the PAC3", { client = { default = 1 } })
+registerprivilege("pac3.load", "Load a PAC3 outfit", "Allows the user load a PAC3 outfit", { client = { default = 1 } })
+registerprivilege("pac3.wear", "Wear a PAC3 outfit", "Allows the user wear a PAC3 outfit", { client = { default = 1 } })
+registerprivilege("pac3.clear", "Clear the PAC3 outfit", "Allows the user to clear the PAC3 outfit", { client = { default = 1 } })
 
 --- PAC3 library
 -- @name pac3
@@ -55,6 +56,13 @@ function pac3_library.loadFromData(data,clear)
 	end
 
 
+end
+
+-- Wears the currently loaded PAC3 outfit
+function pac3_library.wearParts()
+	checkpermission(instance,nil,"pac3.wear")
+
+	PAC.WearParts()
 end
 
 --- Clears the PAC3 outfit
