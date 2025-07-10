@@ -14,7 +14,7 @@ registerprivilege("pac3.clear", "Clear your PAC3 outfit", "Allows the user to cl
 -- @libtbl pac3_library
 SF.RegisterLibrary("pac3")
 
-local decode = pace.luadata.Decode
+local encode,decode = pace.luadata.Encode,pace.luadata.Decode
 
 return function(instance)
 local checkpermission = instance.player ~= SF.Superuser and SF.Permissions.check or function() end
@@ -44,7 +44,7 @@ function pac3_library.loadFromData(data,clear)
     end
 
     if istable(data) then
-		PAC.LoadPartsFromTable(data,clear)
+		PAC.LoadPartsFromTable(instance.Unsanitize(data),clear)
 	elseif isstring(data) then
 		local pac_data,_ = decode(data)
 		if pac_data then
