@@ -16,19 +16,32 @@ SF.RegisterLibrary("pac3")
 
 return function(instance)
 local checkpermission = instance.player ~= SF.Superuser and SF.Permissions.check or function() end
-
 local pac3_library = instance.Libraries.pac3
+
+--- Loads a PAC3 outfit from its filename
+-- @param string name The filename
+-- @param boolean? clear Whether to clear the current outfit
+function pac3_library.loadParts(name,clear)
+	checkpermission(instance,nil,"pac3.load")
+	if clear == true then
+        checkpermission(instance,nil,"pac3.clear")
+    end
+
+    checkluatype(name,TYPE_STRING)
+
+	PAC.LoadParts(name,clear)
+end
 
 --- Loads a PAC3 outfit from a string
 -- @param string str Data to load
--- @param boolean? clear Whether to clear the current parts
+-- @param boolean? clear Whether to clear the current outfit
 function pac3_library.loadFromString(str,clear)
     checkpermission(instance,nil,"pac3.load")
-    checkluatype(str,TYPE_STRING)
-
-    if clear == true then
+	if clear == true then
         checkpermission(instance,nil,"pac3.clear")
     end
+
+    checkluatype(str,TYPE_STRING)
 
     local data,_ = PAC.luadata.Decode(str)
     if data then
