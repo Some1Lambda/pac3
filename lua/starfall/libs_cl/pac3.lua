@@ -46,12 +46,12 @@ function pac3_library.loadFromData(data,clear)
     if istable(data) then
 		PAC.LoadPartsFromTable(data,clear)
 	elseif isstring(data) then
-		local pac_data,_ = decode(str)
+		local pac_data,_ = decode(data)
 		if pac_data then
 			PAC.LoadPartsFromTable(pac_data,clear)
 		end
 	else
-		SF.ThrowTypeError("table or string", SF.GetType(data), 2)
+		SF.ThrowTypeError("table or string",SF.GetType(data),2)
 	end
 
 
