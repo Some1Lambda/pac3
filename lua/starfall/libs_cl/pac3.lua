@@ -54,11 +54,9 @@ function pac3_library.loadFromData(data,clear)
 	else
 		SF.ThrowTypeError("table or string",SF.GetType(data),2)
 	end
-
-
 end
 
--- Wears the currently loaded PAC3 outfit
+--- Wears the currently loaded PAC3 outfit
 function pac3_library.wearParts()
 	checkpermission(instance,nil,"pac3.wear")
 
